@@ -1,0 +1,58 @@
+import { Task } from '@/types/task';
+
+export const mockTasks: Task[] = [
+  {
+    id: '1',
+    title: 'Complete project proposal',
+    description: 'Finish the draft and send for review',
+    isCompleted: false,
+    priority: 'high',
+    category: 'work',
+    timeOfDay: 'morning',
+    dueDate: new Date().toISOString().split('T')[0],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '2',
+    title: 'Memorize Surah Al-Mulk',
+    description: 'Continue from verse 10',
+    isCompleted: false,
+    priority: 'medium',
+    category: 'spiritual',
+    timeOfDay: 'evening',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '3',
+    title: 'Grocery shopping',
+    description: 'Buy fruits, vegetables, and bread',
+    isCompleted: false,
+    priority: 'low',
+    category: 'personal',
+    timeOfDay: 'afternoon',
+    dueDate: new Date().toISOString().split('T')[0],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '4',
+    title: 'Call parents',
+    description: 'Check in and say salam',
+    isCompleted: false,
+    priority: 'medium',
+    category: 'personal',
+    timeOfDay: 'evening',
+    createdAt: new Date().toISOString(),
+    isRecurring: true,
+    recurringDays: [0, 3, 6], // Sunday, Wednesday, Saturday
+  },
+  {
+    id: '5',
+    title: 'Review monthly budget',
+    description: 'Check expenses and savings',
+    isCompleted: false,
+    priority: 'high',
+    category: 'finance',
+    timeOfDay: 'evening',
+    createdAt: new Date().toISOString(),
+  },
+];
