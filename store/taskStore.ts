@@ -3,7 +3,7 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Task, TaskStats, TaskTimeOfDay } from '@/types/task';
 import { getToday } from '@/utils/date';
-import { mockTasks } from '@/mocks/tasks';
+import { mockTasks } from '@/app/mocks/tasks';
 
 interface TaskState {
   tasks: Task[];

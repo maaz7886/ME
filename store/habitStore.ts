@@ -3,8 +3,7 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Habit, HabitStats } from '@/types/habit';
 import { getToday, getStreakCount } from '@/utils/date';
-import { mockHabits } from '@/mocks/habits';
-
+import { mockHabits } from '@/app/mocks/habits';
 interface HabitState {
   habits: Habit[];
   addHabit: (habit: Omit<Habit, 'id' | 'createdAt' | 'completedDates' | 'streak'>) => void;
