@@ -1,10 +1,9 @@
-import { Tabs } from 'expo-router';
+import { Stack } from 'expo-router';
 import { useColorScheme } from 'react-native';
-import { Home, BarChart2, CheckSquare, Settings } from 'lucide-react-native';
-import { colors, darkColors } from '@/constants/colors';
 import { useSettingsStore } from '@/store/settingsStore';
+import { colors, darkColors } from '@/constants/colors';
 
-export default function TabsLayout() {
+export default function RootLayout() {
   const { darkMode } = useSettingsStore();
   const colorScheme = useColorScheme();
   
@@ -13,16 +12,10 @@ export default function TabsLayout() {
   
   // Set the theme colors based on dark mode setting
   const theme = isDarkMode ? darkColors : colors;
-
+  
   return (
-    <Tabs
+    <Stack
       screenOptions={{
-        tabBarActiveTintColor: theme.primary,
-        tabBarInactiveTintColor: theme.textSecondary,
-        tabBarStyle: {
-          backgroundColor: theme.background,
-          borderTopColor: theme.border,
-        },
         headerStyle: {
           backgroundColor: theme.background,
         },
@@ -30,36 +23,10 @@ export default function TabsLayout() {
         headerTitleStyle: {
           fontWeight: 'bold',
         },
+        contentStyle: {
+          backgroundColor: theme.backgroundSecondary,
+        },
       }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <Home size={24} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="habits"
-        options={{
-          title: 'Habits',
-          tabBarIcon: ({ color }) => <CheckSquare size={24} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="stats"
-        options={{
-          title: 'Stats',
-          tabBarIcon: ({ color }) => <BarChart2 size={24} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: 'Settings',
-          tabBarIcon: ({ color }) => <Settings size={24} color={color} />,
-        }}
-      />
-    </Tabs>
+    />
   );
 }
