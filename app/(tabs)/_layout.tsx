@@ -1,43 +1,75 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import { useColorScheme } from 'react-native';
+import { Home, BarChart2, CheckSquare, Settings, BookOpenCheck } from 'lucide-react-native';
+import { colors, darkColors } from '@/constants/colors';
+import { useSettingsStore } from '@/store/settingsStore';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
+export default function TabsLayout() {
+  const { darkMode } = useSettingsStore();
   const colorScheme = useColorScheme();
+
+  // Use the user's preference from settings, or fall back to system preference
+  const isDarkMode = darkMode;
+
+  // Set the theme colors based on dark mode setting
+  const theme = isDarkMode ? darkColors : colors;
 
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+        tabBarActiveTintColor: theme.primary,
+        tabBarInactiveTintColor: theme.textSecondary,
+        tabBarStyle: {
+          backgroundColor: theme.background,
+          borderTopColor: theme.border,
+        },
+        headerStyle: {
+          backgroundColor: theme.background,
+        },
+        headerTintColor: theme.text,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarIcon: ({ color }) => <Home size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="habits"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Habits',
+          tabBarIcon: ({ color }) => <CheckSquare size={24} color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="stats"
+        options={{
+          title: 'Stats',
+          tabBarIcon: ({ color }) => <BarChart2 size={24} color={color} />,
+        }}
+      />
+
+      <Tabs.Screen
+        name="tasks"
+        options={{
+          title: 'Tasks',
+          tabBarIcon: ({ color }) => <BookOpenCheck size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="setting"
+        options={{
+          title: 'Settings',
+          tabBarIcon: ({ color }) => <Settings size={24} color={color} />,
+        }}
+      />
+
     </Tabs>
+
   );
 }
